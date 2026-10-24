@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>شفاء – نظام إدارة الخدمات الطبية والمواعيد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f9fb;--sf:#fff;--ink:#0c1f2e;--mute:#566b7c;--line:#dce8ee;--pri:#0a7ea4;--sec:#0f9d8a;--tint:#e3f4f6;--dk:#0c2a3a;--dkink:#e9f4f7;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08141d;--sf:#0f1f2b;--ink:#e9f4f7;--mute:#9ab3c2;--line:#1e3444;--pri:#4cc3e8;--sec:#3ccfb8;--tint:#0f2b36;--dk:#05202c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#08141d;--sf:#0f1f2b;--ink:#e9f4f7;--mute:#9ab3c2;--line:#1e3444;--pri:#4cc3e8;--sec:#3ccfb8;--tint:#0f2b36;--dk:#05202c;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;line-height:1.8;font-size:17px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sf);z-index:60}
+a{color:inherit;text-decoration:none}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);inset-inline:0;z-index:50;background:color-mix(in srgb,var(--sf) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px}
+.logo small{display:block;font-size:11px;font-weight:500;color:var(--mute);margin-top:-8px}
+.links{display:flex;gap:26px;font-weight:500;color:var(--mute)}
+.links a:hover{color:var(--pri)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--pri);background:transparent;color:var(--pri);font:inherit;font-weight:700;padding:9px 20px;border-radius:10px;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover,.btn.f{background:var(--pri);color:#fff}
+.btn.f:hover{filter:brightness(1.1)}
+.btn:focus-visible,.chip:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--sec);outline-offset:2px}
+.hero{padding:130px 0 70px;background:radial-gradient(900px 400px at 85% -10%,var(--tint),transparent 70%)}
+.hero .w{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+h1{font-size:clamp(36px,5.2vw,58px);line-height:1.25;margin:0 0 18px;font-weight:800}
+h1 em{font-style:normal;color:var(--sec)}
+.lead{font-size:20px;color:var(--mute);margin:0 0 26px;max-width:30em}
+.triage{background:var(--sf);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 24px 60px -30px rgba(10,60,80,.35)}
+.triage h2{font-size:18px;margin:0 0 4px}
+.triage p{margin:0 0 14px;color:var(--mute);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font:inherit;font-size:15px;padding:6px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;transition:all .2s}
+.chip[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:#fff}
+.res{border-top:1px dashed var(--line);padding-top:16px;min-height:150px}
+.res .sp{font-size:14px;color:var(--mute)}
+.res .sp b{color:var(--sec);font-size:18px;display:block}
+.dr{display:flex;align-items:center;gap:14px;margin-top:12px;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.av{flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:linear-gradient(135deg,var(--tint),var(--line))}
+.dr .m{margin-inline-start:auto;text-align:center;font-size:12px;color:var(--mute)}
+.dr .m b{display:block;font-size:20px;color:var(--sec)}
+section{padding:80px 0}
+.hd{max-width:760px;margin:0 0 44px}
+.hd h2{font-size:clamp(28px,3.6vw,40px);line-height:1.3;margin:0 0 12px;font-weight:800}
+.hd p{margin:0;color:var(--mute);font-size:19px}
+.q{font-size:22px;border-inline-start:4px solid var(--sec);padding-inline-start:18px;margin:0 0 44px;max-width:40em}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;background:var(--sf);overflow:hidden;margin-bottom:56px}
+.three>div{padding:28px;border-inline-start:1px solid var(--line)}
+.three>div:first-child{border-inline-start:0}
+.ic{font-size:30px;display:block;margin-bottom:10px}
+h3{font-size:20px;margin:0 0 6px}
+.three p,.port p{margin:0;color:var(--mute);font-size:16px}
+.port{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.port>div{display:flex;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.band{background:var(--dk);color:var(--dkink)}
+.band .hd p{color:#a9c4d0}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+.cols p{margin:0;color:#a9c4d0;font-size:16px}
+.cols .ic{font-size:34px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s;position:relative}
+.step{position:relative;padding-top:24px;border-top:3px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-19px;inset-inline-start:0;width:36px;height:36px;border-radius:50%;background:var(--sec);color:#fff;display:grid;place-items:center;font-weight:800}
+.step:last-child{border-top-color:var(--pri)}
+.step:last-child::before{background:var(--pri)}
+.step p{margin:0;color:var(--mute);font-size:15px}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.doc{background:var(--sf);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px;transition:transform .25s,border-color .25s}
+.doc:hover{transform:translateY(-4px);border-color:var(--sec)}
+.doc .top{display:flex;align-items:center;gap:14px}
+.doc .av{width:64px;height:64px;font-size:32px}
+.doc .sp{color:var(--mute);font-size:15px}
+.tag{margin-inline-start:auto;font-size:12px;font-weight:700;color:var(--sec);background:var(--tint);padding:2px 10px;border-radius:99px}
+.doc .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:14px;color:var(--mute)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.fm{display:grid;gap:14px;background:var(--sf);border:1px solid var(--line);border-radius:18px;padding:24px}
+input,textarea{font:inherit;width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+.ok{color:var(--sec);font-weight:700;min-height:1.6em;margin:0}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:40px}.g>div{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:18px 20px}.g p{margin:4px 0 0;color:var(--mute);font-size:15px}.bad{border-color:#e7b9b6!important}.bad h3{color:#c0443f}.note{background:var(--tint);border-inline-start:4px solid var(--sec);border-radius:10px;padding:14px 18px;margin:0 0 44px;font-weight:700}.tbw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}.tb{width:100%;border-collapse:collapse;background:var(--sf);min-width:560px;font-size:16px}.tb th,.tb td{padding:12px 16px;text-align:start;border-bottom:1px solid var(--line)}.tb th{background:var(--dk);color:#fff}.tb th.n{background:var(--sec)}.tb td.o{color:#c0443f}.tb tr:last-child td{border-bottom:0}.team{columns:2;gap:40px;margin:0 0 20px;padding:0;list-style:none}.team li{padding:2px 0}h3.sub{font-size:22px;margin:0 0 16px}.ph .r{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.ph .off{color:var(--mute);background:var(--bg)}.ph a{color:var(--pri);font-weight:700;unicode-bidi:plaintext}footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
+footer .w{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}
+.js .rv.in{opacity:1;transform:none}
+@media (max-width:860px){.links{display:none}.hero .w,.contact,.port,.cols{grid-template-columns:1fr}.three,.docs{grid-template-columns:1fr}.three>div{border-inline-start:0;border-top:1px solid var(--line)}.three>div:first-child{border-top:0}.steps{grid-template-columns:1fr 1fr;row-gap:36px}section{padding:56px 0}nav .btn:first-of-type{display:none}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav>
+<div class="w">
+<a class="logo" href="#home"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="#0f9d8a"/><path d="M14 8h6v6h6v6h-6v6h-6v-6H8v-6h6z" fill="#fff"/></svg><span>شفاء<small>Shifaa</small></span></a>
+<div class="links"><a href="#home">الرئيسية</a><a href="#about">عن النظام</a><a href="#problem">المشكلة والحل</a><a href="#journey">رحلة المريض</a><a href="#doctors">الأطباء</a><a href="#pharmacies">الصيدليات</a><a href="#compare">المقارنة</a><a href="#contact">تواصل معنا</a></div>
+<div style="display:flex;gap:10px"><a class="btn" href="#contact">تسجيل الدخول</a><a class="btn f" href="#contact">إنشاء حساب</a></div>
+</div>
+</nav>
+
+<header class="hero" id="home">
+<div class="w">
+<div>
+<h1>رعايتك الصحية تبدأ <em>بالاختيار الصح</em></h1>
+<p class="lead">شفاء يوصّلك لأنسب دكتور حسب احتياجك، موقعك وموعدك. صحتك أهم أولوياتنا ♡</p>
+<a class="btn f" href="#doctors">ابحث عن دكتور</a>
+</div>
+<div class="triage" aria-live="polite">
+<h2>جرّب بنفسك: إيه اللي حاسس بيه؟</h2>
+<p>اختار عرض وهنرشح لك التخصص والدكتور المناسب.</p>
+<div class="chips" id="chips"></div>
+<div class="res" id="res"><p class="sp">اختار عرض من فوق لتظهر النتيجة هنا.</p></div>
+</div>
+</div>
+</header>
+
+<section id="about">
+<div class="w">
+<div class="hd rv"><h2>ما هو نظام شفاء؟</h2></div>
+<p class="q rv">“تطبيق ويب يتيح للمريض اختيار أنسب طبيب وأقربه من جميع التخصصات وحجز موعده إلكترونيًا، ومعرفة الصيدليات القريبة، وينظم عمل المركز الطبي من الحجز حتى الفاتورة.”</p>
+<div class="three rv">
+<div><span class="ic">🩺</span><h3>تخصصات متكاملة</h3><p>اختيار الطبيب الأنسب والأقرب وحجز الموعد إلكترونيًا.</p></div>
+<div><span class="ic">🗂️</span><h3>ملف موحد</h3><p>جدول منظم لكل طبيب ودليل معتمد للصيدليات.</p></div>
+<div><span class="ic">📊</span><h3>متابعة دقيقة</h3><p>فواتير وتقارير تحليلية تساعد الإدارة على المتابعة.</p></div>
+</div>
+<div class="hd rv"><h2>الوصف الكامل للنظام المقترح</h2></div>
+<div class="port rv">
+<div><span class="ic">🧑‍🦽</span><span><h3>بوابة المريض</h3><p>إنشاء حساب، اختيار أنسب طبيب وأقربه من كل التخصصات، حجز الموعد أو إلغاؤه وعرض السجل الطبي والفواتير والصيدليات القريبة.</p></span></div>
+<div><span class="ic">👨‍⚕️</span><span><h3>لوحة الطبيب</h3><p>عرض جدول المواعيد اليومي، تحديث حالة الموعد (تم الكشف، ملغى)، وتدوين التشخيص وملاحظات الكشف للمريض.</p></span></div>
+<div><span class="ic">🖥️</span><span><h3>لوحة الاستقبال والإدارة</h3><p>إدارة الأطباء والتخصصات والخدمات والصيدليات، متابعة الحجوزات اليومية، وإصدار الفواتير المالية بدقة.</p></span></div>
+<div><span class="ic">🧾</span><span><h3>التقارير والإشعارات</h3><p>إصدار تقارير مالية وتأكيدية عن الحجوزات والإيرادات، مع إرسال إشعارات تلقائية لتأكيد المواعيد والتذكير بها.</p></span></div>
+</div>
+</div>
+</section>
+
+<section class="band">
+<div class="w">
+<div class="hd rv"><h2>نطاق تطبيق شفاء</h2><p>من اختيار الطبيب والحجز والكشف والفاتورة إلى الوصول للصيدلية: خدمة المريض من كل النواحي.</p></div>
+<div class="cols rv">
+<div><span class="ic">👥</span><h3>أطباء من جميع الأقسام</h3><p>يضم النظام أطباء من كل التخصصات، فيجد المريض الطبيب المناسب لحالته في مكان واحد.</p></div>
+<div><span class="ic">📍</span><h3>ترشيح الأنسب والأقرب</h3><p>يرشح النظام الأطباء حسب تخصص الحالة وموقع المحافظة والمنطقة والمواعيد المتاحة للمريض.</p></div>
+<div><span class="ic">💊</span><h3>دليل الصيدليات</h3><p>بيانات صيدليات المحافظات (الاسم، العنوان، الهاتف) ليصل المريض إلى أقرب صيدلية بعد الكشف.</p></div>
+</div>
+</div>
+</section>
+
+<section id="problem">
+<div class="w">
+<div class="hd rv"><h2>لماذا يحتاج السوق إلى شفاء؟</h2><p>يواجه المريض صعوبة بالغة في الوصول للطبيب المناسب وسط مئات الأدلة التقليدية التي لا تقدم ترشيحًا فعليًا.</p></div>
+<div class="three rv">
+<div><span class="ic">❓</span><h3>حيرة التخصص</h3><p>عدم معرفة المريض للتخصص الطبي الدقيق المناسب لأعراضه الحالية.</p></div>
+<div><span class="ic">⚖️</span><h3>تضارب المعايير</h3><p>صعوبة التوفيق بين كشف الطبيب، الموقع الجغرافي، والمواعيد المتاحة.</p></div>
+<div><span class="ic">🔗</span><h3>انفصال الخدمات</h3><p>عزل حجز الأطباء عن البحث عن الصيدليات المجاورة والأدوية المتاحة.</p></div>
+</div>
+<h3 class="sub rv">عمليات النظام الحالي (قبل التطوير)</h3>
+<div class="g rv">
+<div class="bad"><h3>١. حضور أو اتصال</h3><p>حضور المريض شخصيًا أو الاتصال الهاتفي لحجز الموعد.</p></div>
+<div class="bad"><h3>٢. تسجيل يدوي</h3><p>تدوين بيانات المريض يدويًا في دفاتر أو أوراق.</p></div>
+<div class="bad"><h3>٣. انتظار بالاستقبال</h3><p>انتظار المريض لفترات طويلة حتى يحين دوره.</p></div>
+<div class="bad"><h3>٤. ملف ورقي</h3><p>الكشف وتدوين التشخيص في ملفات ورقية عرضة للتلف.</p></div>
+<div class="bad"><h3>٥. إيصال ورقي</h3><p>دفع الرسوم واستلام إيصالات مالية ورقية.</p></div>
+<div class="bad"><h3>٦. تقارير يدوية</h3><p>إعداد التقارير الإدارية والمالية يدويًا نهاية كل فترة.</p></div>
+</div>
+<p class="note rv">النتيجة: اعتماد كلي على الورق والتواصل المباشر، مما يصعّب عمليات التتبع والتحليل.</p>
+<h3 class="sub rv">مقترحات حل المشكلات</h3>
+<div class="g rv">
+<div><h3>📱 حجز إلكتروني</h3><p>من الموبايل أو الكمبيوتر على مدار الساعة دون الحاجة للحضور.</p></div>
+<div><h3>🗓️ جدول منظم</h3><p>يحدد وقت وصول كل مريض بدقة لإنهاء تكدس الاستقبال.</p></div>
+<div><h3>🚫 منع التضارب</h3><p>منع حجز موعدين لنفس الطبيب في نفس الوقت تلقائيًا.</p></div>
+<div><h3>🗄️ قاعدة بيانات مركزية</h3><p>تحفظ ملف كل مريض بأمان وتتيح البحث الفوري والسريع.</p></div>
+<div><h3>📈 تقارير جاهزة</h3><p>إحصاءات شاملة عن الحجوزات والإيرادات حسب الفترة الزمنية.</p></div>
+<div><h3>🎯 ترشيح الأطباء</h3><p>ترشيح الأنسب والأقرب حسب تخصص الحالة وموقع المريض.</p></div>
+</div>
+<h3 class="sub rv">ما يميز شفاء</h3>
+<div class="g rv" style="margin:0">
+<div><h3>🗺️ البحث الخريطي المتكامل</h3><p>تحديد الأطباء والصيدليات القريبة بالكيلومترات بشكل مباشر.</p></div>
+<div><h3>💰 حساب ملاءمة الميزانية</h3><p>مطابقة قيمة الكشف المحددة من المريض مع أسعار الأطباء لتفادي المفاجآت المالية.</p></div>
+<div><h3>⏱️ مواعيد حية ومباشرة</h3><p>عرض الأطباء المتاحين للكشف بنفس اليوم مع إمكانية التنسيق مع الصيدلية المجاورة.</p></div>
+</div>
+</div>
+</section>
+
+<section id="journey">
+<div class="w">
+<div class="hd rv"><h2>كيف تعمل شفاء؟ رحلة المريض في ٤ خطوات بسيطة</h2><p>اعرف أنسب دكتور ليك… ترشيح شخصي مش مجرد دليل أطباء.</p></div>
+<div class="steps rv">
+<div class="step"><h3>تحديد المشكلة</h3><p>إدخال الأعراض المرضية، مثل ألم بالصدر أو ضيق تنفس.</p></div>
+<div class="step"><h3>فلترة التفضيلات</h3><p>ضبط النطاق الجغرافي، الميزانية، والمواعيد المتاحة.</p></div>
+<div class="step"><h3>اقتراح التخصص</h3><p>تحديد التخصص المناسب تلقائيًا، مثل باطنة وقلب.</p></div>
+<div class="step"><h3>الحجز الفوري</h3><p>اختيار الطبيب الأنسب واختيار موعد الكشف مباشرة.</p></div>
+</div>
+</div>
+</section>
+
+<section id="doctors" style="background:var(--sf);border-block:1px solid var(--line)">
+<div class="w">
+<div class="hd rv"><h2>نخبة الأطباء المتميزين المتاحين عبر المنصة</h2></div>
+<div class="docs rv" id="docs"></div>
+</div>
+</section>
+
+<section id="pharmacies">
+<div class="w">
+<div class="hd rv"><h2>أقرب صيدلية ليك</h2><p>بيانات صيدليات المحافظات (الاسم، العنوان، الهاتف) ليصل المريض إلى أقرب صيدلية بعد الكشف.</p></div>
+<div class="g ph rv" style="margin:0">
+<div><div class="r"><h3 style="margin:0">صيدلية الرحمة</h3><span class="tag">متاحة الآن</span></div><p>القاهرة · المعادي، شارع 9</p><p>١٫٢ كم من موقعك</p><p><a href="tel:01000000001">010 0000 0001</a></p></div>
+<div><div class="r"><h3 style="margin:0">صيدلية الشفاء</h3><span class="tag">متاحة الآن</span></div><p>القاهرة · مدينة نصر، عباس العقاد</p><p>٢٫٤ كم من موقعك</p><p><a href="tel:01000000002">010 0000 0002</a></p></div>
+<div><div class="r"><h3 style="margin:0">صيدلية النور</h3><span class="tag">متاحة الآن</span></div><p>الجيزة · الدقي، شارع التحرير</p><p>٣٫١ كم من موقعك</p><p><a href="tel:01000000003">010 0000 0003</a></p></div>
+<div><div class="r"><h3 style="margin:0">صيدلية الأمل</h3><span class="tag off">مغلقة حاليًا</span></div><p>الجيزة · فيصل، شارع الهرم</p><p>٤٫٥ كم من موقعك</p><p><a href="tel:01000000004">010 0000 0004</a></p></div>
+<div><div class="r"><h3 style="margin:0">صيدلية الحياة</h3><span class="tag">متاحة الآن</span></div><p>الإسكندرية · سموحة، شارع فوزي معاذ</p><p>٥٫٠ كم من موقعك</p><p><a href="tel:01000000005">010 0000 0005</a></p></div>
+<div><div class="r"><h3 style="margin:0">صيدلية السلام</h3><span class="tag off">مغلقة حاليًا</span></div><p>الإسكندرية · سيدي جابر، شارع الحرية</p><p>٦٫٣ كم من موقعك</p><p><a href="tel:01000000006">010 0000 0006</a></p></div>
+</div>
+</div>
+</section>
+
+<section id="compare">
+<div class="w">
+<div class="hd rv"><h2>مقارنة بين النظام الحالي والنظام الجديد</h2></div>
+<div class="tbw rv"><table class="tb"><thead><tr><th>البند</th><th>النظام الحالي</th><th class="n">النظام الجديد (شفاء)</th></tr></thead><tbody>
+<tr><td>الأداء وسرعة الحجز</td><td class="o">بطيء ويدوي، محدد بأوقات العمل</td><td>سريع، وحجز على مدار اليوم 24/7</td></tr>
+<tr><td>التكلفة التشغيلية</td><td class="o">ورق وطباعة وأرشيف مستمر</td><td>أقل بكثير على المدى الطويل</td></tr>
+<tr><td>جمع وتحليل البيانات</td><td class="o">يدوي ومعرض للخطأ والفقد</td><td>آلي مع تقارير وإحصاءات جاهزة</td></tr>
+<tr><td>تكاليف التطوير</td><td class="o">لا توجد (نظام قائم)</td><td>تكلفة لمرة واحدة للبناء والتطوير</td></tr>
+<tr><td>تكاليف التدريب</td><td class="o">محدودة جدًا</td><td>تدريب قصير لسهولة الواجهات</td></tr>
+<tr><td>التكاليف المستقبلية</td><td class="o">أجور الأرشفة والتخزين والورق</td><td>استضافة وصيانة دورية بسيطة</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section style="background:var(--sf);border-block:1px solid var(--line)">
+<div class="w">
+<div class="hd rv"><h2>من يستفيد من نظام شفاء؟</h2></div>
+<div class="g rv">
+<div><h3>👤 المرضى</h3><p>حجز أسرع، ووقت انتظار أقل، ومتابعة للمواعيد والفواتير.</p></div>
+<div><h3>🩺 الأطباء</h3><p>جدول واضح للمواعيد وملفات المرضى المنظمة في مكان واحد.</p></div>
+<div><h3>🎧 الاستقبال</h3><p>عمل ورقي أقل، وتفادي الأخطاء، وتسجيل أسهل للحجوزات.</p></div>
+<div><h3>🏢 إدارة المركز</h3><p>متابعة دقيقة للأداء عبر تقارير الحجوزات والإيرادات.</p></div>
+<div><h3>🧮 المحاسبون</h3><p>فواتير مسجلة بدقة، ومراجعة أسهل للمدفوعات والتحصيل.</p></div>
+</div>
+<h3 class="sub rv">الدراسة المبدئية: الجدوى</h3>
+<div class="three rv">
+<div><span class="ic">💵</span><h3>ماليًا</h3><p>يقلل تكاليف الورق والطباعة والعمل اليدوي، ويوفر وقت الطبيب والموظفين. العائد على الاستثمار مرتفع.</p></div>
+<div><span class="ic">🤝</span><h3>اجتماعيًا</h3><p>يوفر على المرضى وقت الانتظار والتنقل المجهد، ويحسّن جودة الرعاية الصحية وسهولة الوصول إليها للجميع.</p></div>
+<div><span class="ic">🌱</span><h3>بيئيًا</h3><p>يقلل بصورة كبيرة من استهلاك الورق في الملفات والإيصالات والتقارير اليومية، مما يدعم الاستدامة.</p></div>
+</div>
+<p class="note rv">القرار: توصي الدراسة المبدئية بإنشاء نظام شفاء، لأن الجدوى التشغيلية والاقتصادية والفنية تدعم تنفيذه بنجاح وتضمن استدامته.</p>
+<h3 class="sub rv">الأدوات المعتمدة</h3>
+<div class="g rv" style="margin:0">
+<div><h3>Visual Studio 2022</h3><p>بيئة التطوير المتكاملة (IDE) لكتابة وتصحيح الشفرة وإدارة المشروع.</p></div>
+<div><h3>SQL Server 2025</h3><p>نظام إدارة قواعد البيانات العلائقية وتخزين الجداول والإجراءات.</p></div>
+<div><h3>Visual Paradigm</h3><p>رسم المخططات الهيكلية والتنظيمية ومخططات النظام (UML).</p></div>
+<div><h3>ERD+</h3><p>تصميم خرائط الكيانات والعلاقات لقواعد البيانات.</p></div>
+<div><h3>Font Awesome</h3><p>مكتبة الأيقونات والرموز التفاعلية المستخدمة بالواجهات.</p></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="w">
+<div class="hd rv"><h2>تطوير المشروع وقابلية التوسع</h2></div>
+<div class="three rv" style="margin:0">
+<div><span class="ic">🔄</span><h3>متابعة مستمرة</h3><p>توفير جميع الخدمات الطبية: أقرب صيدلية وأنسب طبيب وموعد للمريض.</p></div>
+<div><span class="ic">📝</span><h3>الروشتة الإلكترونية</h3><p>ربط حساب الطبيب بالصيدلية لإرسال الأدوية وصرفها تلقائيًا.</p></div>
+<div><span class="ic">💳</span><h3>الدفع والحجز أونلاين</h3><p>دمج بوابات الدفع الإلكتروني وتأكيد الحجوزات عبر SMS/WhatsApp.</p></div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="w contact">
+<div class="hd rv" style="margin:0"><h2>تواصل معنا</h2><p>عندك سؤال عن النظام أو عايز تجربه في مركزك الطبي؟ سيب بياناتك وهنرد عليك.</p></div>
+<div class="fm rv" id="fm">
+<input id="n" placeholder="الاسم" aria-label="الاسم" autocomplete="name">
+<input id="e" type="email" placeholder="البريد الإلكتروني" aria-label="البريد الإلكتروني" autocomplete="email" dir="ltr" style="text-align:right">
+<textarea id="m" placeholder="رسالتك" aria-label="رسالتك"></textarea>
+<button class="btn f" id="send" type="button">إرسال الرسالة</button>
+<p class="ok" id="ok" role="status"></p>
+</div>
+</div>
+</section>
+
+<section style="background:var(--dk);color:var(--dkink)">
+<div class="w">
+<div class="hd rv"><h2>شكرًا لوقتكم واهتمامكم</h2><p style="color:#a9c4d0">“شفاء” خطوتك الأولى لرعاية صحية أسهل وأذكى. نرحب بجميع أسئلتكم واستفساراتكم.</p></div>
+<h3 class="sub">فريق العمل: المجموعة 2</h3>
+<ul class="team"><li>دعاء محمد صلاح الدين محمد</li><li>أميرة عبد الخالق إبراهيم عكاشة</li><li>رحمة حسين نجيب حسين</li><li>رحمة شعبان عبدالتواب عويان يوسف</li><li>رحمة محمد سليمان عبدالظاهر</li><li>هند أحمد محمد أحمد الفخراني</li></ul>
+<p style="color:#a9c4d0;margin:0">المشرف: د/ سهام محسن · المشرف المساعد: أ/ علي سامي</p>
+</div>
+</section>
+<footer><div class="w"><span>شفاء – نظام إدارة الخدمات الطبية والمواعيد</span><span>مشروع تخرج · نظم المعلومات الإدارية</span></div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+var D=[
+{n:'د. أحمد محمد',s:'استشاري باطنة وقلب',e:'👨‍⚕️',m:96,p:'٣٥٠ ج.م'},
+{n:'د. سارة أحمد',s:'استشاري أمراض القلب',e:'👩‍⚕️',m:94,p:'٤٠٠ ج.م'},
+{n:'د. محمد خالد',s:'أخصائي الباطنة والجهاز الهضمي',e:'👨‍⚕️',m:92,p:'٣٠٠ ج.م'},
+{n:'د. مريم العبد',s:'استشاري طب العيون',e:'👩‍⚕️',m:95,p:'٣٥٠ ج.م'},
+{n:'د. كريم عادل',s:'استشاري طب الأطفال',e:'👨‍⚕️',m:97,p:'٢٥٠ ج.م'},
+{n:'د. نور حسن',s:'أخصائية الأمراض الجلدية',e:'👩‍⚕️',m:91,p:'٣٠٠ ج.م'}];
+var S=[
+{t:'ألم بالصدر',sp:'باطنة وقلب',d:0},
+{t:'ضيق تنفس',sp:'باطنة وقلب',d:1},
+{t:'ألم بالمعدة',sp:'باطنة وجهاز هضمي',d:2},
+{t:'احمرار في العين',sp:'طب العيون',d:3},
+{t:'حرارة عند طفل',sp:'طب الأطفال',d:4}];
+var ch=document.getElementById('chips'),res=document.getElementById('res');
+S.forEach(function(x,i){var b=document.createElement('button');b.className='chip';b.type='button';b.textContent=x.t;b.setAttribute('aria-pressed','false');
+b.onclick=function(){[].forEach.call(ch.children,function(c){c.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
+var d=D[x.d];res.innerHTML='<div class="sp">التخصص المقترح<b>'+x.sp+'</b></div><div class="dr"><div class="av">'+d.e+'</div><div><b>'+d.n+'</b><div class="sp">'+d.s+'</div></div><div class="m"><b>'+d.m+'٪</b>تطابق</div></div><a class="btn f" href="#contact" style="margin-top:16px;width:100%">احجز موعد</a>'};
+ch.appendChild(b)});
+document.getElementById('docs').innerHTML=D.map(function(d){return '<div class="doc"><div class="top"><div class="av">'+d.e+'</div><div><h3 style="margin:0">'+d.n+'</h3><div class="sp">'+d.s+'</div></div></div><div class="row"><span class="tag">تطابق '+d.m+'٪</span><span>الكشف: '+d.p+'</span></div><a class="btn" href="#contact" style="margin-top:12px">احجز الآن</a></div>'}).join('');
+try{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)})}catch(x){document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')})}
+document.getElementById('send').onclick=function(){var o=document.getElementById('ok');
+if(!document.getElementById('n').value.trim()||!document.getElementById('e').value.trim()){o.textContent='من فضلك اكتب الاسم والبريد الإلكتروني.';return}
+o.textContent='تم استلام رسالتك، هنتواصل معاك قريبًا.'};
+</script>
+</body>
+</html>
