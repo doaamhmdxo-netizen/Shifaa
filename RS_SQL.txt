@@ -1,0 +1,185 @@
+CREATE TABLE PATIENT
+(
+  PatientID INT NOT NULL,
+  Full_Name INT NOT NULL,
+  Type_Gender INT NOT NULL,
+  Governorate_/_city INT NOT NULL,
+  Phone_ INT NOT NULL,
+  Password INT NOT NULL,
+  Email-Address INT NOT NULL,
+  Date_of_birth INT NOT NULL,
+  Active INT NOT NULL,
+  Inactive INT NOT NULL,
+  Booking_Status INT NOT NULL,
+  PRIMARY KEY (PatientID)
+);
+
+CREATE TABLE DOCTOR
+(
+  ageConsultation_fee_(EGP) INT NOT NULL,
+  Email_ INT NOT NULL,
+  Professional_license_number INT NOT NULL,
+  Hospital_name INT NOT NULL,
+  Full_clinic_address INT NOT NULL,
+  DoctorID INT NOT NULL,
+  Medical_specialty INT NOT NULL,
+  Contact_number INT NOT NULL,
+  Password INT NOT NULL,
+  ExperienceYears INT NOT NULL,
+  Clinic_name INT NOT NULL,
+  Professional_bio_and_additional_qualifications INT NOT NULL,
+  Active INT NOT NULL,
+  Inactive INT NOT NULL,
+  PRIMARY KEY (DoctorID)
+);
+
+CREATE TABLE APPOINTMENT
+(
+  Visit_type INT NOT NULL,
+  AppointmentTime INT NOT NULL,
+  Notes_for_the_doctor INT NOT NULL,
+  Location INT NOT NULL,
+  AppointmentID INT NOT NULL,
+  AppointmentDate INT NOT NULL,
+  Consultation_total INT NOT NULL,
+  Patient_name INT NOT NULL,
+  Mobile_number INT NOT NULL,
+  Notes_for_the_doctor INT NOT NULL,
+  Patient_name INT NOT NULL,
+  Prescription_details_and_usage_instructions INT NOT NULL,
+  Patient_file INT NOT NULL,
+  Confirm INT NOT NULL,
+  Cancel INT NOT NULL,
+  PatientID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  PRIMARY KEY (AppointmentID),
+  FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID),
+  FOREIGN KEY (DoctorID) REFERENCES DOCTOR(DoctorID)
+);
+
+CREATE TABLE REVIEW
+(
+  Rating INT NOT NULL,
+  ReviewID INT NOT NULL,
+  CreatedAt INT NOT NULL,
+  Comment INT NOT NULL,
+  DoctorID INT NOT NULL,
+  PatientID INT NOT NULL,
+  PRIMARY KEY (ReviewID),
+  FOREIGN KEY (DoctorID) REFERENCES DOCTOR(DoctorID),
+  FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID)
+);
+
+CREATE TABLE PHARMACY
+(
+  Address INT NOT NULL,
+  WorkingHours INT NOT NULL,
+  Longitude INT NOT NULL,
+  Latitude INT NOT NULL,
+  Phone INT NOT NULL,
+  PharmacyID INT NOT NULL,
+  PharmacyName INT NOT NULL,
+  Operating_Hours INT NOT NULL,
+  Attribute INT NOT NULL,
+  Inactive INT NOT NULL,
+  Active INT NOT NULL,
+  PRIMARY KEY (PharmacyID)
+);
+
+CREATE TABLE MEDICALFILE
+(
+  Weight_(kg) INT NOT NULL,
+  Systolic_blood_pressure_(mmHg) INT NOT NULL,
+  Diastolic_blood_pressure_(mmHg) INT NOT NULL,
+  _medical_fileID INT NOT NULL,
+  Oxygen_saturation_(SpO₂_%) INT NOT NULL,
+  Body_temperature_(°C) INT NOT NULL,
+  Heart_rate_(bpm) INT NOT NULL,
+  Height_(cm) INT NOT NULL,
+  Blood_type INT NOT NULL,
+  Blood_glucose_(mg/dL) INT NOT NULL,
+  Diseases_and_chronic_conditions INT NOT NULL,
+  Drug_and_food_allergies INT NOT NULL,
+  Measurement_date INT NOT NULL,
+  Previous_surgeries_or_medical_procedures INT NOT NULL,
+  Medications_and_dosages INT NOT NULL,
+  Contact_name INT NOT NULL,
+  Relationship INT NOT NULL,
+  Phone_number INT NOT NULL,
+  Information_for_your_doctor INT NOT NULL,
+  PatientID INT NOT NULL,
+  PRIMARY KEY (_medical_fileID),
+  FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID)
+);
+
+CREATE TABLE WORKINGHOURS
+(
+  Working_hoursID INT NOT NULL,
+  From INT NOT NULL,
+  To INT NOT NULL,
+  Optional_break INT NOT NULL,
+  DoctorID INT NOT NULL,
+  PRIMARY KEY (Working_hoursID),
+  FOREIGN KEY (DoctorID) REFERENCES DOCTOR(DoctorID)
+);
+
+CREATE TABLE CONVERSATIONS
+(
+  MessageID INT NOT NULL,
+  PatientID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  Message_Content INT NOT NULL,
+  Timestamp INT NOT NULL
+);
+
+CREATE TABLE ADMIN
+(
+  Platform_name INT NOT NULL,
+  Email_address INT NOT NULL,
+  Mobile_number INT NOT NULL,
+  Password INT NOT NULL,
+  Invitation_link INT NOT NULL,
+  Invitation_Token_Status INT NOT NULL,
+  Verification INT NOT NULL,
+  Full_name INT NOT NULL,
+  Displayed_support_email INT NOT NULL,
+  AdminID INT NOT NULL,
+  Suspension_duration INT NOT NULL,
+  Reason_for_action INT NOT NULL,
+  Action_type INT NOT NULL,
+  PRIMARY KEY (AdminID)
+);
+
+CREATE TABLE PASSWORD-RESET-TOKEN
+(
+  Is-Used INT NOT NULL,
+  Expires-At INT NOT NULL,
+  Created-At INT NOT NULL,
+  Token-Hash INT NOT NULL,
+  ResetID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  PatientID INT NOT NULL,
+  AdminID INT NOT NULL,
+  PRIMARY KEY (ResetID),
+  FOREIGN KEY (DoctorID) REFERENCES DOCTOR(DoctorID),
+  FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID),
+  FOREIGN KEY (AdminID) REFERENCES ADMIN(AdminID)
+);
+
+CREATE TABLE HAS
+(
+  ,
+  DoctorID INT NOT NULL,
+  PRIMARY KEY (, DoctorID),
+  FOREIGN KEY () REFERENCES CONVERSATIONS(),
+  FOREIGN KEY (DoctorID) REFERENCES DOCTOR(DoctorID)
+);
+
+CREATE TABLE HAS
+(
+  ,
+  PatientID INT NOT NULL,
+  PRIMARY KEY (, PatientID),
+  FOREIGN KEY () REFERENCES CONVERSATIONS(),
+  FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID)
+);
